@@ -25,4 +25,24 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   pattern = '*',
 })
 
--- vim: ts=2 sts=2 sw=2 et
+
+-- Deleting to an empty register. Do not want to clog the other reg
+vim.keymap.set('v', '<leader>d', '"_d')
+vim.keymap.set('n', '<leader>dd', '"_dd')
+
+-- Yanking in the system clipboard
+vim.keymap.set('v', '<leader>y', '"+y', { desc = 'Yank selection to system clipboard' })
+vim.keymap.set('n', '<leader>y', '"+y', { desc = 'Yank line to system clipboard' })
+vim.keymap.set('n', '<leader>yy', '"+yy', { desc = 'Yank line to system clipboard' })
+
+-- Yanking the entire content of a file to the clipboard
+vim.keymap.set('n', '<leader>Y', 'gg"+yG', { desc = 'Yank entire file to system clipboard' })
+
+-- Pasting from the clipboard
+vim.keymap.set('n', '<leader>P', '"+P', { desc = 'Paste before cursor from system clipboard' })
+vim.keymap.set('n', '<leader>p', '"+p', { desc = 'Paste after cursor from system clipboard' })
+
+-- Move code using J and K
+vim.keymap.set('v', 'K', ':m \'<-2<CR>gv=gv', { desc = 'Move selected text up' })
+vim.keymap.set('v', 'J', ':m \'>+1<CR>gv=gv', { desc = 'Move selected text down' })
+

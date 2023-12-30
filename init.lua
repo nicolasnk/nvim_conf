@@ -43,6 +43,9 @@ P.S. You can delete this when you're done too. It's your config now :)
 --  NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
+vim.wo.number = true
+vim.wo.relativenumber = true
+
 
 -- [[ Install `lazy.nvim` plugin manager ]]
 require 'lazy-bootstrap'
@@ -76,3 +79,7 @@ require 'flutter_tools-setup'
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
+
+
+-- Setting the theme
+vim.cmd[[colorscheme tokyonight-moon]]
