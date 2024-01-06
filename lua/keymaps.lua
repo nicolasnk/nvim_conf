@@ -54,3 +54,7 @@ end
 
 -- set keymap to format files
 set_keymap('n', '<leader>f', ':Format <CR>')
+
+
+-- Going to the file directory
+set_keymap('n', '<leader>fd', ':Ex <CR>', { noremap = true, silent = true, desc = "Current file/buffer directory" })
