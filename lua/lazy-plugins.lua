@@ -127,6 +127,7 @@ require('lazy').setup({
     },
   },
 
+  -- List of Themes for Neovim
   {
     -- Set lualine as statusline
     'nvim-lualine/lualine.nvim',
