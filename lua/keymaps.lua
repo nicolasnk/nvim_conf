@@ -46,3 +46,11 @@ vim.keymap.set('n', '<leader>p', '"+p', { desc = 'Paste after cursor from system
 vim.keymap.set('v', 'K', ':m \'<-2<CR>gv=gv', { desc = 'Move selected text up' })
 vim.keymap.set('v', 'J', ':m \'>+1<CR>gv=gv', { desc = 'Move selected text down' })
 
+-- local function to set keymaps
+local function set_keymap(mode, lhs, rhs, opts)
+  opts = opts or { noremap = true, silent = true }
+  vim.keymap.set(mode, lhs, rhs, opts)
+end
+
+-- set keymap to format files
+set_keymap('n', '<leader>f', ':Format <CR>')
