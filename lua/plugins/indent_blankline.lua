@@ -7,4 +7,7 @@ return {
   -- See `:help ibl`
   main = 'ibl',
   opt = {},
+  config = function()
+    require('ibl').setup()
+  end
 }
