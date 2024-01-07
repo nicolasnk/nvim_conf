@@ -61,7 +61,7 @@ require('which-key').register({
   ['<leader>'] = { name = 'VISUAL <leader>' },
   ['<leader>h'] = { 'Git [H]unk' },
 }, { mode = 'v' }) 
-]]--
+]] --
 
 
 -- Table of each lsp servers that needs to be installed and their configuration
@@ -80,17 +80,16 @@ local servers = {
 
 
 -- Broadcasting additional completion capabilities to nvim-cmp
--- TODO Understand what this is about 
+-- TODO Understand what this is about
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
-local mason_lspconfig = require 'mason-lspconfig'
-local lspconfig = require('lspconfig')
-local util = lspconfig.util
 
 local setup_dart_lsp = function()
--- Dart bundles their LSP server with the runtime executable itself. Thus dart lsp is not included within Mason
--- No need for mason to install the lsp as dart lsp is already installed if you're developping using dart
+  -- Dart bundles their LSP server with the runtime executable itself. Thus dart lsp is not included within Mason
+  -- No need for mason to install the lsp as dart lsp is already installed if you're developping using dart
+  local lspconfig = require('lspconfig')
+  local util = lspconfig.util
   require("lspconfig").dartls.setup({
     cmd = { "dart", "language-server", "--protocol=lsp" },
     filetypes = { "dart" },
@@ -109,7 +108,7 @@ local setup_dart_lsp = function()
       else
         -- Default project root finding logic
         return util.root_pattern("pubspec.yaml")(fname) or
-          util.path.dirname(fname)
+            util.path.dirname(fname)
       end
     end,
     settings = {
@@ -127,7 +126,7 @@ return {
   'neovim/nvim-lspconfig',
   dependencies = {
     -- Automatically install LSPs to stdpath for neovim
-    { 'williamboman/mason.nvim', config = true },
+    'williamboman/mason.nvim',
     'williamboman/mason-lspconfig.nvim',
 
     -- Useful status updates for LSP
@@ -136,22 +135,22 @@ return {
 
     -- Additional lua configuration, makes nvim stuff amazing!
     'folke/neodev.nvim',
-
   },
   config = function()
-    require('mason').setup()
+    require('mason').setup({})
     require('mason-lspconfig').setup()
     require('neodev').setup()
 
+    local mason_lspconfig = require 'mason-lspconfig'
     -- Ensuring that every lsp clients mentioned in our servers table are installed
-    mason_lspconfig.setup{
+    mason_lspconfig.setup {
       ensure_installed = vim.tbl_keys(servers)
     }
 
     -- Setting up handlers for the lsp defined in the servers table
-    mason_lspconfig.setup_handlers{
+    mason_lspconfig.setup_handlers {
       function(server_name)
-        require('lspconfig')[server_name].setup{
+        require('lspconfig')[server_name].setup {
           capabilities = capabilities,
           on_attach = on_attach,
           settings = servers[server_name],

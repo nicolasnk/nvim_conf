@@ -18,11 +18,11 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 -- See `:help vim.highlight.on_yank()`
 local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
 vim.api.nvim_create_autocmd('TextYankPost', {
-  callback = function()
-    vim.highlight.on_yank()
-  end,
-  group = highlight_group,
-  pattern = '*',
+	callback = function()
+		vim.highlight.on_yank()
+	end,
+	group = highlight_group,
+	pattern = '*',
 })
 
 
@@ -48,8 +48,8 @@ vim.keymap.set('v', 'J', ':m \'>+1<CR>gv=gv', { desc = 'Move selected text down'
 
 -- local function to set keymaps
 local function set_keymap(mode, lhs, rhs, opts)
-  opts = opts or { noremap = true, silent = true }
-  vim.keymap.set(mode, lhs, rhs, opts)
+	opts = opts or { noremap = true, silent = true }
+	vim.keymap.set(mode, lhs, rhs, opts)
 end
 
 -- set keymap to format files
