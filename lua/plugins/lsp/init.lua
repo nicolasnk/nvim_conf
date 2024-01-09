@@ -38,11 +38,10 @@ local on_attach = function(_, bufnr)
   end, { desc = 'Format current buffer with LSP' })
 
   nmap('<leader>f', vim.lsp.buf.format(), '[F]ormat File')
-
 end
 
 
---[[ 
+--[[
 Not Sure why is this for
 TODO Try to test what is the use of this code
 ---- document existing key chains
@@ -60,8 +59,9 @@ require('which-key').register {
 require('which-key').register({
   ['<leader>'] = { name = 'VISUAL <leader>' },
   ['<leader>h'] = { 'Git [H]unk' },
-}, { mode = 'v' }) 
-]] --
+}, { mode = 'v' })
+]]
+--
 
 
 -- Table of each lsp servers that needs to be installed and their configuration
@@ -161,5 +161,7 @@ return {
 
     -- We will have LSPs clients configuration that are not supported by Mason under here
     setup_dart_lsp()
+    -- Having some issues to setup the python servers using the function setup_handlers above. Will do it here for now
+    require('plugins.lsp.python_settings').setup_python_lsp(on_attach, capabilities)
   end
 }
