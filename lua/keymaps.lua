@@ -29,6 +29,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 -- Deleting to an empty register. Do not want to clog the other reg
 vim.keymap.set('v', '<leader>d', '"_d', { desc = "Deleting to empty reg" })
 vim.keymap.set('n', '<leader>dd', '"_dd', { desc = "Deleting to empty reg" })
+vim.keymap.set('n', '<leader>diw', '"_diw', {desc = "Deleting word to empty reg"})
 
 -- Yanking in the system clipboard
 vim.keymap.set('v', '<leader>y', '"+y', { desc = 'Yank selection to system clipboard' })
