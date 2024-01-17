@@ -29,7 +29,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 -- Deleting to an empty register. Do not want to clog the other reg
 vim.keymap.set('v', '<leader>d', '"_d', { desc = "Deleting to empty reg" })
 vim.keymap.set('n', '<leader>dd', '"_dd', { desc = "Deleting to empty reg" })
-vim.keymap.set('n', '<leader>diw', '"_diw', {desc = "Deleting word to empty reg"})
+vim.keymap.set('n', '<leader>diw', '"_diw', { desc = "Deleting word to empty reg" })
 
 -- Yanking in the system clipboard
 vim.keymap.set('v', '<leader>y', '"+y', { desc = 'Yank selection to system clipboard' })
@@ -46,6 +46,8 @@ vim.keymap.set('n', '<leader>p', '"+p', { desc = 'Paste after cursor from system
 -- Move code using J and K
 vim.keymap.set('v', 'K', ':m \'<-2<CR>gv=gv', { desc = 'Move selected text up' })
 vim.keymap.set('v', 'J', ':m \'>+1<CR>gv=gv', { desc = 'Move selected text down' })
+
+vim.keymap.set('n', '<A-a>', 'dd', { desc = ' can be used to delete a line' })
 
 -- local function to set keymaps
 local function set_keymap(mode, lhs, rhs, opts)
