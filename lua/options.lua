@@ -8,6 +8,9 @@ vim.o.hlsearch = false
 -- Make line numbers default
 vim.wo.number = true
 
+-- Center the cursor in some way
+vim.o.scrolloff = 50
+
 -- Make relative number default
 vim.wo.relativenumber = true
 
@@ -45,4 +48,3 @@ vim.o.termguicolors = true
 vim.o.shiftwidth = 2
 
 vim.o.tabstop = 2
-
