@@ -9,7 +9,9 @@ return {
 	config = function()
 		require("neotest").setup({
 			adapters = {
-				require("neotest-python")({}),
+				require("neotest-python")({
+					runner = "pytest",
+				}),
 			},
 		})
 		vim.keymap.set("n", "<leader>rt", require("neotest").run.run, { desc = "Running the current test" })

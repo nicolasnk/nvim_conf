@@ -58,6 +58,9 @@ end
 -- set keymap to format files
 set_keymap('n', '<leader>f', ':Format <CR>')
 
+-- open a new tab that points to the current directory exploratory
+set_keymap('n', '<leader>tt', ':rightbelow vsp | Ex	<CR>', { noremap = true, silent = true, desc = "Open a new tab that points to the current directory" })
+
 
 -- Going to the file directory
 set_keymap('n', '<leader>fd', ':Ex <CR>', { noremap = true, silent = true, desc = "Current file/buffer directory" })
