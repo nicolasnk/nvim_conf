@@ -7,7 +7,7 @@ return {
   'tpope/vim-sleuth',
 
   -- Useful plugin to show you pending keybinds.
-  { 'folke/which-key.nvim', opts = {} },
+  -- { 'folke/which-key.nvim', opts = {} },
 
   -- Help with comemnting visual regiones/lines
   -- using `gc`
