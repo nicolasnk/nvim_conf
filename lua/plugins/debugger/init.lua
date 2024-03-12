@@ -20,6 +20,14 @@ return {
 			port = 5678,
 			host = "0.0.0.0"
 		})
+		table.insert(require("dap").configurations.python, {
+			type = "python",
+			justMyCode = false,
+			request = "attach",
+			name = "Python: Attach Debugger 2",
+			port = 5679,
+			host = "0.0.0.0"
+		})
 		require("dap-python").test_runner = "pytest"
 		require("nvim-dap-virtual-text").setup()
 		require("telescope").load_extension("dap")
