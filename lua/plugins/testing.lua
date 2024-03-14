@@ -17,10 +17,10 @@ return {
 				}),
 			},
 		})
-		vim.keymap.set("n", "<leader>t", require("neotest").run.run, { desc = "Running the current test" })
-		vim.keymap.set("n", "<leader>T", ":lua require('neotest').run.run(vim.fn.expand('%'))<CR>",
+		vim.keymap.set("n", "<leader>tc", require("neotest").run.run, { desc = "Running the current test" })
+		vim.keymap.set("n", "<leader>ta", ":lua require('neotest').run.run(vim.fn.expand('%'))<CR>",
 			{ desc = "Running test on the entire file" })
 		-- Configuring running test with debugger
-		-- vim.keymap.set("n", "<leader>td", require("neotest").run.run({strategy = "dap"}), { desc = "Running the current test with debugger" })
+		vim.keymap.set("n", "<leader>ti", ":lua require('neotest').run.run({strategy = 'dap'})<CR>", { desc = "Running the current test with debugger" })
 	end
 }

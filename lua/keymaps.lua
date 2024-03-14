@@ -59,8 +59,47 @@ end
 set_keymap('n', '<leader>f', ':Format <CR>')
 
 -- open a new tab that points to the current directory exploratory
-set_keymap('n', '<leader>tt', ':rightbelow vsp | Ex	<CR>', { noremap = true, silent = true, desc = "Open a new tab that points to the current directory" })
+set_keymap('n', '<leader>tt', ':rightbelow vsp | Ex	<CR>',
+	{ noremap = true, silent = true, desc = "Open a new tab that points to the current directory" })
 
 
 -- Going to the file directory
 set_keymap('n', '<leader>fd', ':Ex <CR>', { noremap = true, silent = true, desc = "Current file/buffer directory" })
+
+
+-- Go to definition on vertical splits
+local function go_to_definition_split()
+	vim.lsp.buf.definition(
+		{
+			on_list = function(options)
+				-- if there are mutliple items, warn the users
+				if #options.items > 1 then
+					vim.notify("Multiple definitions found", vim.log.levels.WARN)
+				end
+
+				-- Save current cursor position
+				local current_pos = vim.api.nvim_win_get_cursor(0)
+
+				-- Open the first item in a vertical split
+				local item = options.items[1]
+				local cmd = "vsplit +" ..
+						item.lnum .. " " .. item.filename .. "|" .. "normal" .. item.col .. "|"
+
+				-- Running the command
+				vim.cmd(cmd)
+
+				-- Restore cursor to original position in the previous window
+				-- Need to switch back to the previous window first
+				vim.cmd("wincmd p")
+				-- Moving the original window to the left
+				vim.cmd("wincmd H")
+
+				-- Set the cursor position
+				vim.api.nvim_win_set_cursor(0, current_pos)
+			end,
+		}
+	)
+end
+
+set_keymap('n', '<leader>gd', go_to_definition_split,
+	{ noremap = true, silent = true, desc = "Go to definition in a vertical split" })
