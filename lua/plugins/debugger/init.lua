@@ -42,5 +42,8 @@ return {
 		vim.keymap.set("n", "<leader>dB", ":lua require('dap').set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>",
 			{ desc = "Debbuger set breakpoint with condition" })
 		vim.keymap.set("n", "<leader>dr", ":lua require('dap').repl.open()<CR>", { desc = "Debbuger open repl" })
+		-- Stopping the current debugger session and terminate the process
+		vim.keymap.set("n", "<leader>dk", ":lua require('dap').disconnect({ terminateDebuggee = true })<CR>", { desc = "Debugger disconnect and terminate" })
+
 	end
 }
