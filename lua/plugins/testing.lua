@@ -14,6 +14,7 @@ return {
 				require("neotest-python")({
 					runner = "pytest",
 					dap = { justMyCode = false },
+					args = { "-vv" },
 				}),
 			},
 		})
@@ -21,6 +22,10 @@ return {
 		vim.keymap.set("n", "<leader>ta", ":lua require('neotest').run.run(vim.fn.expand('%'))<CR>",
 			{ desc = "Running test on the entire file" })
 		-- Configuring running test with debugger
-		vim.keymap.set("n", "<leader>ti", ":lua require('neotest').run.run({strategy = 'dap'})<CR>", { desc = "Running the current test with debugger" })
+		vim.keymap.set("n", "<leader>ti", ":lua require('neotest').run.run({strategy = 'dap'})<CR>",
+			{ desc = "Running the current test with debugger" })
+		-- Entering test window
+		vim.keymap.set("n", "<leader>te", ":lua require('neotest').output.open({ enter = true, auto_close = false })<CR>",
+			{ desc = "Entering test window" })
 	end
 }
