@@ -77,6 +77,7 @@ local servers = {
 			-- diagnostics = { disable = { 'missing-fields' } },
 		},
 	},
+	c = {},
 }
 
 
@@ -84,44 +85,6 @@ local servers = {
 -- TODO Understand what this is about
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
-
-
-local setup_dart_lsp = function()
-	-- Dart bundles their LSP server with the runtime executable itself. Thus dart lsp is not included within Mason
-	-- No need for mason to install the lsp as dart lsp is already installed if you're developping using dart
-	local lspconfig = require('lspconfig')
-	local util = lspconfig.util
-	require("lspconfig").dartls.setup({
-		cmd = { "dart", "language-server", "--protocol=lsp" },
-		filetypes = { "dart" },
-		init_options = {
-			closingLabels = true,
-			flutterOutline = true,
-			onlyAnalyzeProjectsWithOpenFiles = false,
-			outline = true,
-			suggestFromUnimportedLibraries = true,
-		},
-		root_dir = function(fname)
-			-- Check if the file is inside the .pub-cache
-			if string.find(fname, "/.pub-cache/") then
-				-- Find the .pub-cache root
-				return os.getenv("HOME") .. "/.pub-cache"
-			else
-				-- Default project root finding logic
-				return util.root_pattern("pubspec.yaml")(fname) or
-				    util.path.dirname(fname)
-			end
-		end,
-		settings = {
-			dart = {
-				completeFunctionCalls = true,
-				showTodos = true,
-			},
-		},
-		on_attach = on_attach,
-		capabilities = capabilities,
-	})
-end
 
 return {
 	'neovim/nvim-lspconfig',
@@ -163,7 +126,7 @@ return {
 		}
 
 		-- We will have LSPs clients configuration that are not supported by Mason under here
-		setup_dart_lsp()
+		require('plugins.lsp.dart_setup').setup_dart_lsp(on_attach, capabilities)
 		-- Having some issues to setup the python servers using the function setup_handlers above. Will do it here for now
 		require('plugins.lsp.python_settings').setup_python_lsp(on_attach, capabilities)
 	end

@@ -10,28 +10,16 @@ return {
 		"mfussenegger/nvim-dap-python"
 	},
 	config = function()
-		require("dap-python").setup()
-		-- Disable justMyCode for python
-		table.insert(require("dap").configurations.python, {
-			type = "python",
-			justMyCode = false,
-			request = "attach",
-			name = "Python: Attach Debugger",
-			port = 5678,
-			host = "0.0.0.0"
-		})
-		table.insert(require("dap").configurations.python, {
-			type = "python",
-			justMyCode = false,
-			request = "attach",
-			name = "Python: Attach Debugger 2",
-			port = 5679,
-			host = "0.0.0.0"
-		})
-		require("dap-python").test_runner = "pytest"
+		require("dap").set_log_level("TRACE")
+
+		-- Setting up PYthon Debugger configuration
+		require("plugins.debugger.python_debugger").setup_python_debugger()
+
+		-- Setting up C debugger
+		require("plugins.debugger.c_debugger").setup_c_debugger()
+
 		require("nvim-dap-virtual-text").setup()
 		require("telescope").load_extension("dap")
-
 		-- Setting keymaps for debugger
 		vim.keymap.set("n", "<leader>dc", ":lua require('dap').continue()<CR>", { desc = "Debbuger continue" })
 		vim.keymap.set("n", "<leader>do", ":lua require('dap').step_over()<CR>", { desc = "Debbuger step over" })
@@ -43,7 +31,7 @@ return {
 			{ desc = "Debbuger set breakpoint with condition" })
 		vim.keymap.set("n", "<leader>dr", ":lua require('dap').repl.open()<CR>", { desc = "Debbuger open repl" })
 		-- Stopping the current debugger session and terminate the process
-		vim.keymap.set("n", "<leader>dk", ":lua require('dap').disconnect({ terminateDebuggee = true })<CR>", { desc = "Debugger disconnect and terminate" })
-
+		vim.keymap.set("n", "<leader>dk", ":lua require('dap').disconnect({ terminateDebuggee = true })<CR>",
+			{ desc = "Debugger disconnect and terminate" })
 	end
 }

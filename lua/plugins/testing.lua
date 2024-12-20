@@ -1,6 +1,7 @@
 return {
 	"nvim-neotest/neotest-python",
 	dependencies = {
+		"nvim-neotest/nvim-nio",
 		"nvim-neotest/neotest",
 		"nvim-lua/plenary.nvim",
 		"mfussenegger/nvim-dap",
