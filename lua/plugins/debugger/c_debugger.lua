@@ -30,6 +30,18 @@ function CDebug.setup_c_debugger()
 			}
 		},
 		{
+			name = "Launch Fluent bit",
+			type = "cppdbg",
+			request = "launch",
+			program = "${workspaceFolder}/build/bin/fluent-bit",
+			args = {"-c", "${workspaceFolder}/conf/LNKD-fluent-bit.dev.conf"},
+			stopAtEntry = false,
+			cwd = "${workspaceFolder}",
+			environment = {},
+			externalConsole = true,
+			MIMode = "gdb",
+		},
+		{
 			name = "Attach to gdbserver :1234",
 			type = 'cppdbg',
 			request = 'launch',

@@ -77,7 +77,7 @@ local servers = {
 			-- diagnostics = { disable = { 'missing-fields' } },
 		},
 	},
-	c = {},
+	c = {}
 }
 
 
@@ -89,6 +89,8 @@ capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 return {
 	'neovim/nvim-lspconfig',
 	dependencies = {
+		-- nvim java lsp
+		'mfussenegger/nvim-jdtls',
 		-- Automatically install LSPs to stdpath for neovim
 		'williamboman/mason.nvim',
 		'williamboman/mason-lspconfig.nvim',
@@ -116,6 +118,10 @@ return {
 		-- Setting up handlers for the lsp defined in the servers table
 		mason_lspconfig.setup_handlers {
 			function(server_name)
+				-- do not setup jdtls as it is already setup in java_setup.lua
+				if server_name == 'jdtls' then
+					return
+				end
 				require('lspconfig')[server_name].setup {
 					capabilities = capabilities,
 					on_attach = on_attach,
@@ -129,5 +135,7 @@ return {
 		require('plugins.lsp.dart_setup').setup_dart_lsp(on_attach, capabilities)
 		-- Having some issues to setup the python servers using the function setup_handlers above. Will do it here for now
 		require('plugins.lsp.python_settings').setup_python_lsp(on_attach, capabilities)
+		-- Setting up the java lsp
+		-- require('plugins.lsp.java_setup').setup_java_lsp(on_attach, capabilities)
 	end
 }

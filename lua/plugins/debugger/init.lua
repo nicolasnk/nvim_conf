@@ -18,6 +18,9 @@ return {
 		-- Setting up C debugger
 		require("plugins.debugger.c_debugger").setup_c_debugger()
 
+		-- Setting up the java debugger
+		require("plugins.debugger.java_debugger").setup_java_debugger()
+
 		require("nvim-dap-virtual-text").setup()
 		require("telescope").load_extension("dap")
 		-- Setting keymaps for debugger
