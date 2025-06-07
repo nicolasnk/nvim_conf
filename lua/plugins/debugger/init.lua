@@ -28,6 +28,26 @@ return {
 			port = 5679,
 			host = "0.0.0.0"
 		})
+		-- Is there a way to make this dynamic by inputing both localRoot and remoteRoot during connection ?
+		table.insert(require("dap").configurations.python, {
+			name = "PyGrpc Hardcoded",
+			type = "python",
+			request = "attach",
+			justMyCode = false,
+			connect = {
+				host = "0.0.0.0",
+				port = 5678,
+			},
+			pathMappings = {
+				{
+					localRoot =
+					"/Users/nnkiere/Desktop/WorkCode/gai-integtest-intervention/gai-integtest-intervention/src/gaiintegtestintervention",
+					remoteRoot =
+					"/export/content/lid/apps/gai-integtest-intervention/i001/libexec/gai-integtest-intervention.pyz_82a3b596895ca19922d2de6d34448a94ecc0a228f14c4d521b9bf075946c3b4e/site-packages/gaiintegtestintervention/",
+				}
+			}
+		})
+
 		require("dap-python").test_runner = "pytest"
 		require("nvim-dap-virtual-text").setup()
 		require("telescope").load_extension("dap")
@@ -43,7 +63,7 @@ return {
 			{ desc = "Debbuger set breakpoint with condition" })
 		vim.keymap.set("n", "<leader>dr", ":lua require('dap').repl.open()<CR>", { desc = "Debbuger open repl" })
 		-- Stopping the current debugger session and terminate the process
-		vim.keymap.set("n", "<leader>dk", ":lua require('dap').disconnect({ terminateDebuggee = true })<CR>", { desc = "Debugger disconnect and terminate" })
-
+		vim.keymap.set("n", "<leader>dk", ":lua require('dap').disconnect({ terminateDebuggee = true })<CR>",
+			{ desc = "Debugger disconnect and terminate" })
 	end
 }
