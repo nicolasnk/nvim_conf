@@ -11,6 +11,14 @@ function JavaDebug.setup_java_debugger()
 			vmArgs = "-Xmx2G",
 		},
 		{
+			name = "Debug Specific Test",
+			type = "java",
+			request = "launch",
+			mainClass = "org.junit.runner.JUnitCore",
+			args = { "com.linkedin.beam.dogs.TestGAITestResultEventProcessor" },
+			vmArgs = "-Xmx8G",
+		},
+		{
 			name = "Debug Attach (8000)",
 			type = "java",
 			request = "attach",

@@ -24,9 +24,11 @@ function CDebug.setup_c_debugger()
 			cwd = "${workspaceFolder}",
 			stopAtEntry = true,
 			setupCommands = {
-				text = '-enable-pretty-printing',
-				description = 'Enable pretty printing for gdb',
-				ignoreFailures = false
+				{
+					text = '-enable-pretty-printing',
+					description = 'Enable pretty printing for gdb',
+					ignoreFailures = false
+				}
 			}
 		},
 		{
@@ -34,7 +36,7 @@ function CDebug.setup_c_debugger()
 			type = "cppdbg",
 			request = "launch",
 			program = "${workspaceFolder}/build/bin/fluent-bit",
-			args = {"-c", "${workspaceFolder}/conf/LNKD-fluent-bit.dev.conf"},
+			args = { "-c", "${workspaceFolder}/conf/LNKD-fluent-bit.dev.conf" },
 			stopAtEntry = false,
 			cwd = "${workspaceFolder}",
 			environment = {},

@@ -7,6 +7,8 @@ function LspJava.setup_java_lsp(on_attach, capabilities)
 		vim.fn.glob(home .. "/.local/share/nvim/mason/share/java-debug-adapter/com.microsoft.java.debug.plugin.jar"),
 	}
 	vim.list_extend(bundles, vim.split(vim.fn.glob(home .. "/.local/share/nvim/mason/share/java-test/*.jar", 1), "\n"))
+	vim.list_extend(bundles,
+		vim.split(vim.fn.glob(home .. "/.local/share/nvim/mason/packages/java-*/extension/server/*/jar", 1), "\n"))
 
 
 	local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
@@ -22,14 +24,13 @@ function LspJava.setup_java_lsp(on_attach, capabilities)
 			'-Dlog.protocol=true',
 			-- Could use the lombok agent here if needed
 			'-Dlog.level=ALL',
-			'-Xmx1g',
+			'-Xmx4g',
 			'--add-modules=ALL-SYSTEM',
 			'--add-opens', 'java.base/java.util=ALL-UNNAMED',
 			'--add-opens', 'java.base/java.lang=ALL-UNNAMED',
+			'-javaagent:' .. home .. '/.local/share/nvim/mason/share/lombok/lombok.jar',
 
-			'-jar', home ..
-		'/.local/share/nvim/mason/share/jdtls/plugins/org.eclipse.equinox.launcher_1.6.900.v20240613-2009.jar',
-
+			'-jar', home .. '/.local/share/nvim/mason/share/jdtls/plugins/org.eclipse.equinox.launcher_1.6.900.v20240613-2009.jar',
 			-- 💀
 			'-configuration', home .. '/.local/share/nvim/mason/packages/jdtls/config_linux',
 
