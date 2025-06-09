@@ -49,9 +49,19 @@ return {
 		})
 
 		require("dap-python").test_runner = "pytest"
+		require("dap").set_log_level("TRACE")
+
+		-- Setting up PYthon Debugger configuration
+		require("plugins.debugger.python_debugger").setup_python_debugger()
+
+		-- Setting up C debugger
+		require("plugins.debugger.c_debugger").setup_c_debugger()
+
+		-- Setting up the java debugger
+		require("plugins.debugger.java_debugger").setup_java_debugger()
+
 		require("nvim-dap-virtual-text").setup()
 		require("telescope").load_extension("dap")
-
 		-- Setting keymaps for debugger
 		vim.keymap.set("n", "<leader>dc", ":lua require('dap').continue()<CR>", { desc = "Debbuger continue" })
 		vim.keymap.set("n", "<leader>do", ":lua require('dap').step_over()<CR>", { desc = "Debbuger step over" })

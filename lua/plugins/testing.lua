@@ -1,13 +1,15 @@
 return {
 	"nvim-neotest/neotest-python",
 	dependencies = {
+		"nvim-neotest/nvim-nio",
 		"nvim-neotest/neotest",
 		"nvim-neotest/nvim-nio",
 		"nvim-lua/plenary.nvim",
 		"mfussenegger/nvim-dap",
 		"mfussenegger/nvim-dap-python",
 		"antoinemadec/FixCursorHold.nvim",
-		"nvim-treesitter/nvim-treesitter"
+		"nvim-treesitter/nvim-treesitter",
+		"rcasia/neotest-java"
 	},
 	config = function()
 		require("neotest").setup({
@@ -17,6 +19,7 @@ return {
 					dap = { justMyCode = false },
 					args = { "-vv" },
 				}),
+				require("neotest-java")({})
 			},
 		})
 		vim.keymap.set("n", "<leader>tc", require("neotest").run.run, { desc = "Running the current test" })
