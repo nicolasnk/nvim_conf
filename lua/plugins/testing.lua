@@ -3,6 +3,7 @@ return {
 	dependencies = {
 		"nvim-neotest/nvim-nio",
 		"nvim-neotest/neotest",
+		"nvim-neotest/nvim-nio",
 		"nvim-lua/plenary.nvim",
 		"mfussenegger/nvim-dap",
 		"mfussenegger/nvim-dap-python",

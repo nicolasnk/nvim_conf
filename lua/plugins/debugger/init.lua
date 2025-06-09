@@ -10,6 +10,45 @@ return {
 		"mfussenegger/nvim-dap-python"
 	},
 	config = function()
+		require("dap-python").setup()
+		-- Disable justMyCode for python
+		table.insert(require("dap").configurations.python, {
+			type = "python",
+			justMyCode = false,
+			request = "attach",
+			name = "Python: Attach Debugger",
+			port = 5678,
+			host = "0.0.0.0"
+		})
+		table.insert(require("dap").configurations.python, {
+			type = "python",
+			justMyCode = false,
+			request = "attach",
+			name = "Python: Attach Debugger 2",
+			port = 5679,
+			host = "0.0.0.0"
+		})
+		-- Is there a way to make this dynamic by inputing both localRoot and remoteRoot during connection ?
+		table.insert(require("dap").configurations.python, {
+			name = "PyGrpc Hardcoded",
+			type = "python",
+			request = "attach",
+			justMyCode = false,
+			connect = {
+				host = "0.0.0.0",
+				port = 5678,
+			},
+			pathMappings = {
+				{
+					localRoot =
+					"/Users/nnkiere/Desktop/WorkCode/gai-integtest-intervention/gai-integtest-intervention/src/gaiintegtestintervention",
+					remoteRoot =
+					"/export/content/lid/apps/gai-integtest-intervention/i001/libexec/gai-integtest-intervention.pyz_82a3b596895ca19922d2de6d34448a94ecc0a228f14c4d521b9bf075946c3b4e/site-packages/gaiintegtestintervention/",
+				}
+			}
+		})
+
+		require("dap-python").test_runner = "pytest"
 		require("dap").set_log_level("TRACE")
 
 		-- Setting up PYthon Debugger configuration
